@@ -5,9 +5,11 @@ from openai import OpenAI
 from flask import Flask
 
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
+
 client = OpenAI(
-    api_key="not-needed",
-    base_url="https://keylessai.thryx.workers.dev/v1"
+    base_url="https://openrouter.ai/api/v1",
+    api_key=OPENROUTER_API_KEY,
 )
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
@@ -16,9 +18,9 @@ bot = telebot.TeleBot(TELEGRAM_TOKEN)
 def handle_message(message):
     try:
         response = client.chat.completions.create(
-            model="deepseek-chat",
+            model="deepseek/deepseek-r1:free",
             messages=[
-                {"role": "system", "content": "Ты — дружелюбный помощник."},
+                {"role": "system", "content": "Ты — дружелюбный помощник. Отвечай на русском языке."},
                 {"role": "user", "content": message.text}
             ]
         )
