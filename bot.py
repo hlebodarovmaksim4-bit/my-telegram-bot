@@ -11,8 +11,9 @@ DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 client = OpenAI(
-    api_key="admin",
-    base_url="https://api.openapis.online/openai"
+    api_key="not-needed",
+    base_url="https://keylessai.thryx.workers.dev/v1"
+)
 )
 
 @bot.message_handler(func=lambda message: True)
