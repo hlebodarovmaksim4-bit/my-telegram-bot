@@ -18,11 +18,12 @@ bot = telebot.TeleBot(TELEGRAM_TOKEN)
 def handle_message(message):
     try:
         response = client.chat.completions.create(
-            model="google/gemini-2.5-flash",
-            messages=[
-                {"role": "system", "content": "Ты — дружелюбный помощник. Отвечай на русском языке."},
-                {"role": "user", "content": message.text}
-            ]
+    model="google/gemini-2.5-flash",
+    messages=[
+        {"role": "system", "content": "Ты — дружелюбный помощник. Отвечай на русском языке."},
+        {"role": "user", "content": message.text}
+    ],
+    max_tokens=500
         )
         bot.reply_to(message, response.choices[0].message.content)
     except Exception as e:
