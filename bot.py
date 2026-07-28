@@ -4,17 +4,13 @@ import telebot
 from openai import OpenAI
 from flask import Flask
 
-# ===== ВСТАВЬ СВОИ КЛЮЧИ (или через переменные окружения) =====
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
-DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
-# ================================================================
-
-bot = telebot.TeleBot(TELEGRAM_TOKEN)
 client = OpenAI(
     api_key="not-needed",
     base_url="https://keylessai.thryx.workers.dev/v1"
 )
-)
+
+bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
 @bot.message_handler(func=lambda message: True)
 def handle_message(message):
@@ -22,7 +18,7 @@ def handle_message(message):
         response = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
-                {"role": "system", "content": "Ты — друг и помощник. Отвечаешь по-русски."},
+                {"role": "system", "content": "Ты — дружелюбный помощник."},
                 {"role": "user", "content": message.text}
             ]
         )
@@ -30,7 +26,6 @@ def handle_message(message):
     except Exception as e:
         bot.reply_to(message, f"Ошибка: {e}")
 
-# ===== Веб-сервер для Render =====
 app = Flask(__name__)
 
 @app.route('/')
