@@ -18,7 +18,7 @@ bot = telebot.TeleBot(TELEGRAM_TOKEN)
 def handle_message(message):
     try:
         response = client.chat.completions.create(
-            model="deepseek/deepseek-r1:free",
+            model="google/gemini-2.5-flash",
             messages=[
                 {"role": "system", "content": "Ты — дружелюбный помощник. Отвечай на русском языке."},
                 {"role": "user", "content": message.text}
