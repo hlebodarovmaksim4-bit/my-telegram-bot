@@ -10,7 +10,10 @@ DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
 # ================================================================
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
-client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com")
+client = OpenAI(
+    api_key="admin",
+    base_url="https://api.openapis.online/openai"
+)
 
 @bot.message_handler(func=lambda message: True)
 def handle_message(message):
